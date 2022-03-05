@@ -1,3 +1,28 @@
+-Projeto criado com Laravel v9.3.1 (PHP v8.1.2) <br/><br/>
+-Obs {<br/>*Precisa ser criado um database no banco* <br/>
+*Precisa ser setado no arquivo .env o DB_DATABASE com o nome do banco criado*
+<br/>} <br/><br/>
+-Logo após a criação do banco e configuração do arquivo .env, rode o comando no terminal (dentro da pasta do projeto) -> <br>php artisan migrate</b> <br/><br/>
+ 
+-Após rodar o comando acima o Laravel irá criar as tabelas e as colunas necessárias para que a API funcione corretamente<br/><br/>
+
+-Obs: Antes de subir o projeto, eu deletei o arquivo .gitignore, o arquivo está puro da forma que está em minha máquina, o comando acima irá funcionar perfeiramente 😁 
+<br/><br/>
+<b>Teste feito com a rota de cadastro dos dados do retângulo:</b>
+![img01](https://user-images.githubusercontent.com/58890881/156864551-b082e474-28bc-4f8b-be40-40c20eb750c4.png)
+<br/><br/>
+<b>Teste feito com a rota de cadastro dos dados do triângulo:</b>
+![img02](https://user-images.githubusercontent.com/58890881/156864554-32ec95de-a237-44a1-86ea-84879f86610c.png)
+<br/><br/>
+<b>Teste feito com a rota que retorna o valor da soma das áreas de todos os polígonos cadastrados:</b>
+![img03](https://user-images.githubusercontent.com/58890881/156864555-35ec0af8-a35c-4fec-b399-293cf282d5d5.png)
+<br/><br/>
+
+A API também tem outras rotas extras, como por exemplo, rotas que retornam todos os cadastros tanto dos retângulos quanto dos triângulos (todos e por ID),
+rota para editar os dados (filtrando por ID) cadastrados de ambos os polígonos e também uma rota para deletar os dados cadastrados (filtrando por ID) 😄
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
