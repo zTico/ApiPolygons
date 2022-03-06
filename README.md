@@ -4,9 +4,9 @@
 <br/>} <br/><br/>
 -Logo após a criação do banco e configuração do arquivo .env, rode o comando no terminal (dentro da pasta do projeto) -> <br>php artisan migrate</b> <br/><br/>
  
--Após rodar o comando acima o Laravel irá criar as tabelas e as colunas necessárias para que a API funcione corretamente<br/><br/>
+-Após rodar o comando acima o Laravel irá criar as tabelas e as colunas necessárias no seu banco para que a API funcione corretamente<br/><br/>
 
--Obs: Antes de subir o projeto, eu deletei o arquivo .gitignore, o arquivo está puro da forma que está em minha máquina, o comando acima irá funcionar perfeiramente 😁 
+-Obs: Antes de subir o projeto, eu deletei o arquivo .gitignore, o arquivo está puro da forma que está em minha máquina, o comando acima irá funcionar corretamente 😁 
 <br/><br/>
 <b>Teste feito com a rota de cadastro dos dados do retângulo:</b>
 ![img01](https://user-images.githubusercontent.com/58890881/156864551-b082e474-28bc-4f8b-be40-40c20eb750c4.png)
@@ -20,6 +20,19 @@
 
 A API também tem outras rotas extras, como por exemplo, rotas que retornam todos os cadastros tanto dos retângulos quanto dos triângulos (todos e por ID),
 rota para editar os dados (filtrando por ID) cadastrados de ambos os polígonos e também uma rota para deletar os dados cadastrados (filtrando por ID) 😄
+
+<h2>Todas as rotas:</h2>
+<h4>(post)Cadastrar retangulos: api/rectangle</h4>
+<h4>(get)Retorna todos os retangulos cadastrados: api/rectangles</h4>
+<h4>(get)Retorna o retangulo por ID: api/rectangle/{id}</h4>
+<h4>(put)Atualiza os dados do retangulo por ID: api/rectangle/{id}</h4>
+<h4>(delete)Deleta os dados do retangulo por ID: api/rectangle/{id}</h4>
+<h4>(post)Cadastrar triangulos: api/triangle</h4>
+<h4>(get)Retorna todos os triangulos cadastrados: api/triangles</h4>
+<h4>(get)Retorna o triangulo por ID: api/triangle/{id}</h4>
+<h4>(put)Atualiza os dados do triangulo por ID: api/triangle/{id}</h4>
+<h4>(delete)Deleta os dados do triangulo por ID: api/triangle/{id}</h4>
+<h4>(get)Retorna a soma das áreas de todos os polígonos cadastrados: api/polygonarea</h4>
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
