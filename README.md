@@ -1,6 +1,6 @@
 -Projeto criado com Laravel v9.3.1 (PHP v8.1.2) <br/><br/>
 -PHP 8.0 > setado globalmente nas variáis de ambiente<br/><br/>
--Obs {<br/>*Precisa ser criado um database no banco* <br/>
+-Obs {<br/>*Precisa ser criado um database no banco (mysql)* <br/>
 *Precisa ser setado no arquivo .env o DB_DATABASE com o nome do banco criado*
 <br/>} <br/><br/>
 -Logo após a criação do banco e configuração do arquivo .env, rode o comando no terminal (dentro da pasta do projeto) -> <br>php artisan migrate</b> <br/><br/>
