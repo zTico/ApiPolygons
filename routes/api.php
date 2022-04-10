@@ -1,8 +1,8 @@
 <?php
-
-use App\Http\Controllers\ApiController;
-use App\Http\Controllers\RectanglesApiController;
-use App\Http\Controllers\TrianglesApiController;
+use App\Http\Controllers\Calculations\CalculatePolygons;
+use App\Http\Controllers\Polygons\RectanglesApiController;
+use App\Http\Controllers\Polygons\TrianglesApiController;
+use App\Http\Controllers\Tests\TestApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,7 +11,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //A rota verifica se a API está retornando
-Route::get('/ping', [ApiController::class, 'pingPong']);
+Route::get('/ping', [TestApiController::class, 'pingPong']);
 
 //Rotas dos Retângulos
 Route::post('/rectangle', [RectanglesApiController::class, 'createRectangle']); //Cadastra um retangulo 
@@ -28,7 +28,7 @@ Route::put('/triangle/{id}', [TrianglesApiController::class, 'updateTriangle']);
 Route::delete('/triangle/{id}', [TrianglesApiController::class, 'deleteTriangle']); //Deleta os dados do triângulo por ID
 
 //Rota que retorne o valor da soma das áreas de todos os polígonos cadastrados
-Route::get('/polygonarea', [ApiController::class, 'getCalcAreaPolygons']);
+Route::get('/polygonssumarea', [CalculatePolygons::class, 'getCalcAreaPolygonss']);
 
 
 

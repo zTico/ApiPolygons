@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Polygons;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -9,57 +9,65 @@ use App\models\Triangle;
 
 class TrianglesApiController extends Controller
 {
-    public function createTriangle(Request $request) {
-        $result = ['sucess' => true];
+    public function createTriangle(Request $request): array
+    {   
+        try {
+            $result = ['sucess' => true];
 
-        // As regras dos parâmetros, são obrigatorios do tipo inteiro e tem que possuir ao menos 1 caracteres  
-        $rules = [
-            'base' => 'required|integer|min:1',
-            'height' => 'required|integer|min:1'
-        ];
+            // As regras dos parâmetros, são obrigatorios do tipo inteiro e tem que possuir ao menos 1 caracteres  
+            $rules = [
+                'base' => 'required|integer|min:1',
+                'height' => 'required|integer|min:1'
+            ];
+            $validator = Validator::make($request->all(), $rules);
 
-        $validator = Validator::make($request->all(), $rules);
+            //Verifica se algum parametro foje das regras passadas
+            if($validator->fails()) {
+                $result = ['error' => $validator->errors()];
+                return $result; 
+            }
 
-        //Verifica se algum parametro foje das regras passadas
-        if($validator->fails()) {
-            $result = ['error' => $validator->errors()];
-            return $result; 
-        }
+            $base = $request->input('base');
+            $height = $request->input('height');
+            $area = ($base*$height)/2;
+            $date = date('Y-m-d H:i:s');
 
-        $base = $request->input('base');
-        $height = $request->input('height');
-        $area = ($base*$height)/2;
-        $date = date('Y-m-d H:i:s');
+            //Faz a inserção dos dados no banco através do Eloquent ORM
+            $triangle = new Triangle();
+            $triangle->base = $base;
+            $triangle->height = $height;
+            $triangle->area = $area;
+            $triangle->created_at = $date;
+            $triangle->updated_at = null;
+            $triangle->save();
 
-        //Faz a inserção dos dados no banco através do Eloquent ORM
-        $triangle = new Triangle();
-        $triangle->base = $base;
-        $triangle->height = $height;
-        $triangle->area = $area;
-        $triangle->created_at = $date;
-        $triangle->updated_at = null;
-        $triangle->save();
-
-        return $result;
-    }
-
-    public function readAllTriangles() {
-        $result = ['sucess' => true];
-
-        //Retorna todos os dados da tabela retângulos através do Eloquent ORM  
-        $triangle = Triangle::all();
-
-        //Verifica se retorna algo
-        if(count($triangle) == 0) {
-            $result['list'] = 'Não possui dados na lista';
             return $result;
+        } catch (\Throwable $e) {
+            return ['error' => $e];
         }
-        $result['list'] = $triangle;
-
-        return $result;
+        
     }
+    public function readAllTriangles(): array
+    {
+        try {
+            $result = ['sucess' => true];
 
-    public function readTriangle(Request $request) {
+            //Retorna todos os dados da tabela retângulos através do Eloquent ORM  
+            $triangle = Triangle::all();
+
+            //Verifica se retorna algo
+            if(count($triangle) == 0) {
+                $result['list'] = 'Não possui dados na lista';
+                return $result;
+            }
+            $result['list'] = $triangle;
+            return $result;
+        } catch (\Throwable $e) {
+            return ['error' => $e];
+        }
+    }
+    public function readTriangle(Request $request): array
+    {
         $result = ['sucess' => true];
 
         //Retorna todos os dados da tabela retângulos filtrado por ID através do Eloquent ORM  
@@ -74,8 +82,8 @@ class TrianglesApiController extends Controller
 
         return $result;
     }
-
-    public function updateTriangle(Request $request) {
+    public function updateTriangle(Request $request): array
+    {
         $result = ['sucess' => true];
 
         //Faz novamente uma validação das regras, dessa vez sendo obrigatório apenas o valor ser inteiro
@@ -129,8 +137,8 @@ class TrianglesApiController extends Controller
 
         return $result;
     }
-
-    public function deleteTriangle(request $request) {
+    public function deleteTriangle(request $request): array
+    {
         $result = ['sucess' => true];
 
         $triangle = Triangle::find($request->id);
