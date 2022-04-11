@@ -20,13 +20,11 @@ class TrianglesApiController extends Controller
                 'height' => 'required|integer|min:1'
             ];
             $validator = Validator::make($request->all(), $rules);
-
             //Verifica se algum parametro foje das regras passadas
             if($validator->fails()) {
                 $result = ['error' => $validator->errors()];
                 return $result; 
             }
-
             $base = $request->input('base');
             $height = $request->input('height');
             $area = ($base*$height)/2;
@@ -40,12 +38,10 @@ class TrianglesApiController extends Controller
             $triangle->created_at = $date;
             $triangle->updated_at = null;
             $triangle->save();
-
             return $result;
         } catch (\Throwable $e) {
             return ['error' => $e];
         }
-        
     }
     public function readAllTriangles(): array
     {
@@ -91,28 +87,23 @@ class TrianglesApiController extends Controller
             'base' => 'integer',
             'height' => 'integer'
         ];
-
         $validator = Validator::make($request->all(), $rules);
-
         //Verifica se algum parâmetro foje da regra passada
         if($validator->fails()) {
             $result = ['error' => $validator->errors()];
             return $result; 
         }
-
         //Verifica se algum dos parâmetro foi preenchido com 0
         if($request->base === 0 || $request->height === 0) {
             $result = ['error' => 'Os valores dos parâmetros não podem ser 0'];
             return $result; 
         }
-
         $triangle = Triangle::find($request->id);
 
         $base = $request->input('base') ?? $triangle->base;
         $height = $request->input('height') ?? $triangle->height;
         $area = ($base*$height)/2;
         $date = date('Y-m-d H:i:s');
-        
         //Faz o preenchimento dos parâmetros no banco através do Eloquent ORM  
         if($triangle) {
             if($base) {
@@ -127,14 +118,11 @@ class TrianglesApiController extends Controller
             if($date) {
                 $triangle->updated_at = $date;
             }
-
             $triangle->save();
-
         } else {
             $result = ['error' => 'O ID '.$request->id.' não existe'];
             return $result;
         }
-
         return $result;
     }
     public function deleteTriangle(request $request): array
@@ -142,14 +130,12 @@ class TrianglesApiController extends Controller
         $result = ['sucess' => true];
 
         $triangle = Triangle::find($request->id);
-
         if($triangle) {
             $triangle->delete();
         } else {
             $result = ['error' => 'O ID '.$request->id.' não existe'];
             return $result;
         }
-
         return $result;
     }
 }

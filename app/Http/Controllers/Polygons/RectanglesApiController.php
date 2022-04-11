@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Polygons;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 use App\models\Rectangle;
 
 class RectanglesApiController extends Controller
@@ -72,7 +71,7 @@ class RectanglesApiController extends Controller
 
             //Retorna todos os dados da tabela retângulos filtrado por ID através do Eloquent ORM  
             $rectangle = Rectangle::find($request->id);
-
+            
             if($rectangle) {
                 $result['rectangle'] = $rectangle;
             } else {
@@ -95,7 +94,6 @@ class RectanglesApiController extends Controller
                 'height' => 'integer'
             ];
             $validator = Validator::make($request->all(), $rules);
-    
             //Verifica se algum parâmetro foje da regra passada
             if($validator->fails()) {
                 $result = ['error' => $validator->errors()];
