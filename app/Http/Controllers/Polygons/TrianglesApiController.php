@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Polygons;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 use App\models\Triangle;
 
 class TrianglesApiController extends Controller

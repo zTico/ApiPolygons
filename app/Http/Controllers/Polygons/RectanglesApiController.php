@@ -71,7 +71,7 @@ class RectanglesApiController extends Controller
 
             //Retorna todos os dados da tabela retângulos filtrado por ID através do Eloquent ORM  
             $rectangle = Rectangle::find($request->id);
-            
+
             if($rectangle) {
                 $result['rectangle'] = $rectangle;
             } else {
