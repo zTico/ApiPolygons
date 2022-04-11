@@ -11,7 +11,6 @@ class RectanglesApiController extends Controller
     {
         try {
             $result = ['sucess' => true];
-            
             // As regras dos parâmetros, são obrigatorios do tipo inteiro e tem que possuir ao menos 1 caracteres  
             $rules = [
                 'base' => 'required|integer|min:1',
@@ -40,7 +39,6 @@ class RectanglesApiController extends Controller
             $rectangle->created_at = $date;
             $rectangle->updated_at = null;
             $rectangle->save();
-
             return $result;
         } catch (\Throwable $e) {
             return ['error' => $e];
@@ -50,7 +48,6 @@ class RectanglesApiController extends Controller
     {
         try {
             $result = ['sucess' => true];
-
             //Retorna todos os dados da tabela retângulos através do Eloquent ORM  
             $rectangle = Rectangle::all();
             //Verifica se retorna algo
@@ -68,7 +65,6 @@ class RectanglesApiController extends Controller
     {
         try {
             $result = ['sucess' => true];
-
             //Retorna todos os dados da tabela retângulos filtrado por ID através do Eloquent ORM  
             $rectangle = Rectangle::find($request->id);
 
@@ -87,7 +83,6 @@ class RectanglesApiController extends Controller
     {   
         try {
             $result = ['sucess' => true];
-
             //Faz novamente uma validação das regras, dessa vez sendo obrigatório apenas o valor ser inteiro
             $rules = [
                 'base' => 'integer',
@@ -109,7 +104,6 @@ class RectanglesApiController extends Controller
             $height = $request->input('height') ?? $rectangle->height;
             $area = $base * $height;
             $date = date('Y-m-d H:i:s');
-
             //Faz o preenchimento dos parâmetros no banco
             if($rectangle) {
                 if($base) {

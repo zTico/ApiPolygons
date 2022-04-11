@@ -11,7 +11,6 @@ class TrianglesApiController extends Controller
     {   
         try {
             $result = ['sucess' => true];
-
             // As regras dos parâmetros, são obrigatorios do tipo inteiro e tem que possuir ao menos 1 caracteres  
             $rules = [
                 'base' => 'required|integer|min:1',
@@ -27,7 +26,6 @@ class TrianglesApiController extends Controller
             $height = $request->input('height');
             $area = ($base*$height)/2;
             $date = date('Y-m-d H:i:s');
-
             //Faz a inserção dos dados no banco através do Eloquent ORM
             $triangle = new Triangle();
             $triangle->base = $base;
@@ -45,10 +43,8 @@ class TrianglesApiController extends Controller
     {
         try {
             $result = ['sucess' => true];
-
             //Retorna todos os dados da tabela retângulos através do Eloquent ORM  
             $triangle = Triangle::all();
-
             //Verifica se retorna algo
             if(count($triangle) == 0) {
                 $result['list'] = 'Não possui dados na lista';
@@ -63,23 +59,19 @@ class TrianglesApiController extends Controller
     public function readTriangle(Request $request): array
     {
         $result = ['sucess' => true];
-
         //Retorna todos os dados da tabela retângulos filtrado por ID através do Eloquent ORM  
         $triangle = Triangle::find($request->id);
-
         if($triangle) {
             $result['rectangle'] = $triangle;
         } else {
             $result = ['error' => 'O ID '.$request->id.' não existe'];
             return $result;
         }
-
         return $result;
     }
     public function updateTriangle(Request $request): array
     {
         $result = ['sucess' => true];
-
         //Faz novamente uma validação das regras, dessa vez sendo obrigatório apenas o valor ser inteiro
         $rules = [
             'base' => 'integer',
@@ -97,7 +89,7 @@ class TrianglesApiController extends Controller
             return $result; 
         }
         $triangle = Triangle::find($request->id);
-
+        //Agrega as variáveis os valores recebidos da requisição
         $base = $request->input('base') ?? $triangle->base;
         $height = $request->input('height') ?? $triangle->height;
         $area = ($base*$height)/2;
@@ -126,7 +118,6 @@ class TrianglesApiController extends Controller
     public function deleteTriangle(request $request): array
     {
         $result = ['sucess' => true];
-
         $triangle = Triangle::find($request->id);
         if($triangle) {
             $triangle->delete();
