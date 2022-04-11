@@ -10,20 +10,9 @@ class CalculatePolygons extends Controller
     {
         try {
             $result = ['sucess' => true];
-            $arrFull = [];
-            $rectangle = Rectangle::all();  
-            $triangle = Triangle::all();
-            $value = 0;
-            foreach ($rectangle as $item) {
-                array_push($arrFull, $item->area);
-            }
-            foreach ($triangle as $item) {
-                array_push($arrFull, $item->area);
-            }
-            foreach ($arrFull as $item) {
-                $value += $item;
-            }
-            $result['fullSumArea'] = $value;
+            $rectangle = Rectangle::all(['area'])->sum('area');  
+            $triangle = Triangle::all(['area'])->sum('area');
+            $result['fullSumAreaPolygons'] = $rectangle + $triangle;
             return $result;
         } catch (\Throwable $e) {
             return ['error' => $e];
